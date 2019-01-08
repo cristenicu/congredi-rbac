@@ -66,7 +66,7 @@ class CongrediRbacServiceProvider extends ServiceProvider
 		/**
 		 * Bind FluentDatabaseAdapter to the IoC Container
 		 */
-		$this->app->bindShared('rbac.database.adapter', function ($app) use ($provider) {
+		$this->app->singleton('rbac.database.adapter', function ($app) use ($provider) {
 			$databaseAdapter = new FluentDatabaseAdapter($app['db'], $app['config']->get('rbac'));
 			$databaseAdapter->setConnectionName($provider->getConnectionName());
 
@@ -76,7 +76,7 @@ class CongrediRbacServiceProvider extends ServiceProvider
 		/**
 		 * Bind FluentDatabaseAdapter to the IoC Container
 		 */
-		$this->app->bindShared(FluentDatabaseAdapter::class, function ($app) use ($provider) {
+		$this->app->singleton(FluentDatabaseAdapter::class, function ($app) use ($provider) {
 			return $app['rbac.database.adapter'];
 		});
 
